@@ -16,6 +16,12 @@ class ModelMergeCombos:
     and the current index help downstream flow-control nodes.
     """
 
+    DESCRIPTION = (
+        "Cycle or randomize three merge weights across a configurable grid. "
+        "Use the direction/skip controls to walk the grid, restrict the sum, normalize "
+        "weights on demand, and emit batches while tracking position and loop state."
+    )
+
     def __init__(self):
         self._state = None
 
@@ -23,22 +29,32 @@ class ModelMergeCombos:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "start_a": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                "start_b": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                "start_c": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.01}),
-                "step": ("FLOAT", {"default": 0.1, "min": 0.01, "max": 1.0, "step": 0.01}),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 9_999_999, "step": 1}),
-                "direction": ("STRING", {"default": "ascending", "choices": ["ascending", "descending", "shuffle"]}),
-                "skip": ("INT", {"default": 1, "min": 1, "max": 999}),
-                "batch_size": ("INT", {"default": 1, "min": 1, "max": 20}),
-                "normalize": ("BOOLEAN", {"default": False}),
-                "min_sum": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 3.0, "step": 0.01}),
-                "max_sum": ("FLOAT", {"default": 3.0, "min": 0.0, "max": 3.0, "step": 0.01}),
+                "start_a": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.01, "tooltip": "Starting weight for the input block; snapped to the nearest grid value."}),
+                "start_b": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.01, "tooltip": "Starting weight for the middle block; snapped to the nearest grid value."}),
+                "start_c": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 1.0, "step": 0.01, "tooltip": "Starting weight for the output block; snapped to the nearest grid value."}),
+                "step": ("FLOAT", {"default": 0.1, "min": 0.01, "max": 1.0, "step": 0.01, "tooltip": "Spacing between grid points (smaller values create more combinations)."}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 9_999_999, "step": 1, "tooltip": "Iteration offset; feed the returned seed back in to advance through combos."}),
+                "direction": ("STRING", {"default": "ascending", "choices": ["ascending", "descending", "shuffle"], "tooltip": "Traversal mode for walking the grid (forward, reverse, or random)."}),
+                "skip": ("INT", {"default": 1, "min": 1, "max": 999, "tooltip": "How many grid steps to jump on each advance; 1 visits every combo."}),
+                "batch_size": ("INT", {"default": 1, "min": 1, "max": 20, "tooltip": "Number of qualifying combos to gather per call (first triple is emitted)."}),
+                "normalize": ("BOOLEAN", {"default": False, "tooltip": "Rescale each accepted triple so the weights sum to 1.0."}),
+                "min_sum": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 3.0, "step": 0.01, "tooltip": "Reject combos whose weights sum below this threshold (before normalization)."}),
+                "max_sum": ("FLOAT", {"default": 3.0, "min": 0.0, "max": 3.0, "step": 0.01, "tooltip": "Reject combos whose weights sum above this ceiling (before normalization)."}),
             }
         }
 
     RETURN_TYPES = ("FLOAT", "FLOAT", "FLOAT", "INT", "INT", "INT", "BOOLEAN", "STRING")
     RETURN_NAMES = ("a", "b", "c", "seed", "index", "total", "looped", "batch")
+    OUTPUT_TOOLTIPS = (
+        "Weight for the input block after snapping/normalization.",
+        "Weight for the middle block after snapping/normalization.",
+        "Weight for the output block after snapping/normalization.",
+        "Incremented seed to feed back in for deterministic iteration.",
+        "Linear index of the selected combo within the current grid.",
+        "Total number of combos produced by the current grid settings.",
+        "True if iteration wrapped without filling the requested batch.",
+        "Comma-separated preview of all combos gathered this call."
+    )
     FUNCTION = "next_combo"
     CATEGORY = "utils"
 
