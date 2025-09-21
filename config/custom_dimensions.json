@@ -1,0 +1,144 @@
+[
+  {
+    "label": "SDXL",
+    "Resolutions": [
+      {
+        "label": "SDXL - Square (1:1)",
+        "value": "1024x1024"
+      },
+      {
+        "label": "SDXL - Portrait (1:2)",
+        "value": "704x1408"
+      },
+      {
+        "label": "SDXL - Portrait (11:21)",
+        "value": "704x1344"
+      },
+      {
+        "label": "SDXL - Portrait (4:7)",
+        "value": "768x1344"
+      },
+      {
+        "label": "SDXL - Portrait (3:5)",
+        "value": "768x1280"
+      },
+      {
+        "label": "SDXL - Portrait (13:19)",
+        "value": "832x1216"
+      },
+      {
+        "label": "SDXL - Portrait (13:18)",
+        "value": "832x1152"
+      },
+      {
+        "label": "SDXL - Portrait (7:9)",
+        "value": "896x1152"
+      },
+      {
+        "label": "SDXL - Portrait (14:17)",
+        "value": "896x1088"
+      },
+      {
+        "label": "SDXL - Portrait (15:17)",
+        "value": "960x1088"
+      },
+      {
+        "label": "SDXL - Portrait (15:16)",
+        "value": "960x1024"
+      },
+      {
+        "label": "SDXL - Landscape (16:15)",
+        "value": "1024x960"
+      },
+      {
+        "label": "SDXL - Landscape (17:15)",
+        "value": "1088x960"
+      },
+      {
+        "label": "SDXL - Landscape (17:14)",
+        "value": "1088x896"
+      },
+      {
+        "label": "SDXL - Landscape (9:7)",
+        "value": "1152x896"
+      },
+      {
+        "label": "SDXL - Landscape (18:13)",
+        "value": "1152x832"
+      },
+      {
+        "label": "SDXL - Landscape (19:13)",
+        "value": "1216x832"
+      },
+      {
+        "label": "SDXL - Landscape (5:3)",
+        "value": "1280x768"
+      },
+      {
+        "label": "SDXL - Landscape (7:4)",
+        "value": "1344x768"
+      },
+      {
+        "label": "SDXL - Landscape (21:11)",
+        "value": "1344x704"
+      },
+      {
+        "label": "SDXL - Landscape (2:1)",
+        "value": "1408x704"
+      },
+      {
+        "label": "SDXL - Landscape (23:11)",
+        "value": "1472x704"
+      },
+      {
+        "label": "SDXL - Ultrawide (12:5)",
+        "value": "1536x640"
+      },
+      {
+        "label": "SDXL - Ultrawide (5:2)",
+        "value": "1600x640"
+      },
+      {
+        "label": "SDXL - Ultrawide (26:9)",
+        "value": "1664x576"
+      },
+      {
+        "label": "SDXL - Ultrawide (3:1)",
+        "value": "1728x576"
+      }
+    ]
+  },
+  {
+    "label": "SDXL",
+    "Resolutions": [
+      {
+        "label": "Square (1:1) - Small",
+        "value": "512x512"
+      },
+      {
+        "label": "Square (1:1) - Medium",
+        "value": "1024x1024"
+      },
+      {
+        "label": "Square (1:1) - Large",
+        "value": "1536x1536"
+      },
+      {
+        "label": "Landscape (16:9) - FHD",
+        "value": "1920x1080"
+      },
+      {
+        "label": "Landscape (16:9) - QHD",
+        "value": "2560x1440"
+      },
+      {
+        "label": "Landscape (16:9) - 4K",
+        "value": "3840x2160"
+      },
+      {
+        "label": "Ultrawide (12:5)",
+        "value": "1536x640"
+      }
+    ]
+  }
+]
